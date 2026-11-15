@@ -121,7 +121,40 @@ lab-server/
 
 ## Getting started
 
-_To be filled in once the project is set up (Python version, install, run with Docker Compose)._
+### Prerequisites
+
+- **Docker Desktop** (or Docker Engine with the Compose plugin). Check with `docker compose version`.
+- **Git**
+- For running tests outside Docker: **Python 3.12**
+
+### Run the backend and database
+
+```bash
+git clone https://github.com/ieee-chicago-epics/lab-server.git
+cd lab-server
+cp .env.example .env      # then edit .env and set a real POSTGRES_PASSWORD (also in DATABASE_URL)
+docker compose up --build
+```
+
+This starts PostgreSQL and the backend. Then check:
+
+- <http://localhost:8000/health> returns `{"ok": true}`
+- <http://localhost:8000/docs> opens the interactive API docs
+
+Stop with `Ctrl+C`. Run `docker compose down` to remove the containers; add `-v` to also delete the database data.
+
+### Configuration
+
+Settings come from environment variables or a local `.env` file (see `.env.example`). The real `.env` is git-ignored: never commit it.
+
+### Run tests
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+pytest
+```
 
 ---
 

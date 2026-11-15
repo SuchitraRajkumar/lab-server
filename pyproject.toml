@@ -1,0 +1,27 @@
+[project]
+name = "lab-server"
+version = "0.1.0"
+description = "Backend for the Remote Robotics Learning Lab"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "sqlalchemy",
+    "alembic",
+    "httpx",
+    "pydantic-settings",
+    "psycopg[binary]",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
